@@ -29,7 +29,79 @@ int main()
 }
 
 void game(){
-    // In progress ...
+    Calculate calc;
+    int difficulty, points;
+
+    printf("Enter the desired difficulty level [1,2,3 or 4]: ");
+    scanf("%d", &difficulty);
+
+    calc.difficulty = difficulty;
+
+    // Generates a random integer between 0 and 2
+    // 0 -> sum, 1 -> subtraction, 2 -> Multiply
+    calc.operation = rand() % 3;
+
+    if (calc.difficulty == 1){ //easy
+        calc.value1 = rand() % 11; // random integer between 0 and 10
+        calc.value2 = rand() % 11;
+    } else if (calc.difficulty == 2){//medium
+        calc.value1 = rand() % 101; // random integer between 0 a 100
+        calc.value2 = rand() % 101;
+    } else if (calc.difficulty == 3){ //hard
+        calc.value1 = rand() % 1001; // random integer between 0 a 1000
+        calc.value2 = rand() % 1001;
+    } else if (calc.difficulty == 4){ //very hard
+        calc.value1 = rand() % 10001;// random integer between 0 a 10000
+        calc.value2 = rand() % 10001;
+    } else { // secret level
+        calc.value1 = rand() % 100001;// random integer between 0 a 100000
+        calc.value2 = rand() % 100001;
+    }
+
+    int answer;
+    printf("Enter the result for the following operation: \n");
+
+    //Sum
+    if (calc.operation == 0){
+        printf("%d + %d\n", calc.value1, calc.value2);
+        scanf("%d", &answer);
+
+        if(add(answer, calc)){
+            points += 1;
+            printf("You have %d points.\n", points);
+        }
+    } else if (calc.operation == 1){
+        printf("%d - %d\n", calc.value1, calc.value2);
+        scanf("%d". &answer);
+
+        if (sub(answer, calc)){
+            points += 1;
+            printf("You have %d points.\n", points);
+        }
+    } else if (calc.operation == 2){
+        printf("%d * %d\n". calc.value1, calc.value2);
+        scanf("%d", &answer);
+
+        if (multiply(answer, calc)){
+            points += 1;
+            printf("You have %d points.\n". points);
+        }
+    } else{
+        printf("The operation %d is not recognized", calc.operation);
+    }
+
+    //Continue the game?
+    printf("Do you want to continue the game? [1 - yes, 0 - no]: ");
+    int cont;
+    scanf("%d", &cont);
+
+    if (cont == 1){
+        game();
+    } else {
+        printf("you finish the game with %d points", points);
+        print("See you next time!");
+        exit(0);
+    }
 }
 
 void showInfo(Calculate calc){
