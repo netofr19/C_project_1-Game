@@ -17,7 +17,6 @@ int multiply(int answer, Calculate calc);
 
 int points = 0;
 
-
 int main()
 {
     // Must be called only one time.
@@ -30,7 +29,7 @@ int main()
 
 void game(){
     Calculate calc;
-    int difficulty, points;
+    int difficulty;
 
     printf("Enter the desired difficulty level [1,2,3 or 4]: ");
     scanf("%d", &difficulty);
@@ -72,34 +71,37 @@ void game(){
         }
     } else if (calc.operation == 1){
         printf("%d - %d\n", calc.value1, calc.value2);
-        scanf("%d". &answer);
+        scanf("%d", &answer);
 
         if (sub(answer, calc)){
             points += 1;
             printf("You have %d points.\n", points);
         }
     } else if (calc.operation == 2){
-        printf("%d * %d\n". calc.value1, calc.value2);
+        printf("%d * %d\n", calc.value1, calc.value2);
         scanf("%d", &answer);
 
         if (multiply(answer, calc)){
             points += 1;
-            printf("You have %d points.\n". points);
+            printf("You have %d points.\n", points);
         }
     } else{
         printf("The operation %d is not recognized", calc.operation);
     }
 
     //Continue the game?
-    printf("Do you want to continue the game? [1 - yes, 0 - no]: ");
+    printf("What do you want to do? [2 - Continue, 1 - Show Info, 0 - Exit]: ");
     int cont;
     scanf("%d", &cont);
 
-    if (cont == 1){
+    if (cont == 2){
+        game();
+    } else if (cont == 1){
+        showInfo(calc);
         game();
     } else {
-        printf("you finish the game with %d points", points);
-        print("See you next time!");
+        printf("you finish the game with %d points\n", points);
+        printf("See you next time!\n");
         exit(0);
     }
 }
@@ -116,7 +118,7 @@ void showInfo(Calculate calc){
     } else {
         sprintf (op, "Unknown Operation");
     }
-    printf("Value 01: %d \nValue 02: %d \nDificuldade: %d \nOperation: %s", calc.value1, calc.value2, calc.difficulty, op);
+    printf("Value 01: %d \nValue 02: %d \nDifficulty: %d \nOperation: %s\n", calc.value1, calc.value2, calc.difficulty, op);
 }
 
 int add(int answer, Calculate calc){
